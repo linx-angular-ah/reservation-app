@@ -39,7 +39,7 @@ router.post("/login", async function (req, res) {
     }
 
     // パスワードが一致していなければエラー
-    if (await !foundUser.hasSamePassword(password)) {
+    if (!foundUser.hasSamePassword(password)) {
       return res.status(422).send({
         errors: [{ title: "ログイン", detail: "パスワードが一致していません" }],
       });
