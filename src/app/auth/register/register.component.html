@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
           <div class="card card-register">
-            <h3 class="title">新規会員登録　</h3>
+            <h3 class="title">新規会員登録</h3>
             <div class="social-line text-center">
               <a
                 href="#pablo"
@@ -26,12 +26,31 @@
                 <i class="fa fa-twitter"></i>
               </a>
             </div>
-            <form class="register-form">
+            <form
+              class="register-form"
+              #registerForm="ngForm"
+              (ngSubmit)="register(registerForm)"
+            >
+              <label>名前</label>
+              <div class="input-group form-group-no-border">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="nc-icon nc-single-02"></i>
+                  </span>
+                </div>
+
+                <input
+                  ngModel
+                  name="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="名前"
+                  required
+                />
+              </div>
+
               <label>メールアドレス</label>
-              <div
-                class="input-group form-group-no-border"
-                [ngClass]="{ 'input-group-focus': focus === true }"
-              >
+              <div class="input-group form-group-no-border">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="nc-icon nc-email-85"></i>
@@ -39,38 +58,63 @@
                 </div>
 
                 <input
-                  type="text"
+                  ngModel
+                  name="email"
+                  type="email"
                   class="form-control"
                   placeholder="メールアドレス"
-                  (focus)="focus = true"
-                  (blur)="focus = false"
+                  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                  required
                 />
               </div>
 
               <label>パスワード</label>
-              <div
-                class="input-group form-group-no-border"
-                [ngClass]="{ 'input-group-focus': focus1 === true }"
-              >
+              <div class="input-group form-group-no-border">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="nc-icon nc-key-25"></i>
                   </span>
                 </div>
+
                 <input
-                  type="text"
+                  ngModel
+                  name="password"
+                  type="password"
                   class="form-control"
                   placeholder="パスワード"
-                  (focus)="focus1 = true"
-                  (blur)="focus1 = false"
+                  minlength="6"
+                  required
                 />
               </div>
-              <button class="btn btn-danger btn-block btn-round">
+
+              <label>パスワード（確認）</label>
+              <div class="input-group form-group-no-border">
+                <input
+                  ngModel
+                  name="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  placeholder="パスワード（確認）"
+                  required
+                />
+              </div>
+
+              <button
+                [disabled]="!registerForm.valid"
+                class="btn btn-danger btn-block btn-round"
+                type="submit"
+              >
                 新規登録
               </button>
             </form>
+            <br />
+            <div *ngIf="errors && errors.length > 0">
+              <p *ngFor="let error of errors" class="alert alert-danger">{{ error.detail }}</p>
+            </div>
             <div class="forgot">
-              <a href="#" class="btn btn-link btn-danger">パスワードを忘れた場合</a>
+              <a href="#" class="btn btn-link btn-danger"
+                >パスワードを忘れた場合</a
+              >
             </div>
           </div>
         </div>

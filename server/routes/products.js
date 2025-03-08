@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../model/product');
-const product = require('../model/product');
 
 // v7.0.0以降はコールバックが非推奨になったため、async/awaitを使用する
 // router.get('', function(req, res) {
