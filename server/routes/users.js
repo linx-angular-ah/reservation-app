@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/user");
 const jwt = require("jsonwebtoken");
-const config = require("../config/dev");
+const config = require("../config");
 
 // v7.0.0以降はコールバックが非推奨になったため、async/awaitを使用する
 // router.get('', function(req, res) {
